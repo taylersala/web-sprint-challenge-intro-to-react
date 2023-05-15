@@ -1,21 +1,13 @@
 // Write your Character component here
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 
-
-function Character({ name, birth_year }) {
-const [name, setName] = useState;
-const fetchName = (id) => {
-    fetch(`https://swapi.dev/api/people/${id}`)
-    .then(res => res.json())
-    console.log(res.data); 
-    return (
-        <div className="user">
-            <div>{name}</div>
+function Character({ name }) {
+    return ( 
+    <div className ="character">
+        <h2>{name}</h2>
         </div>
-    )
+    );
 }
-}
+export default Character;
 
-
-// https://swapi.dev/api/people/
