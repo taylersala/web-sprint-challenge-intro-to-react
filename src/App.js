@@ -1,30 +1,44 @@
+
+// https://swapi.py4e.com/
+// `https://swapi.dev/api/people/
+
 import React, { useState, useEffect } from 'react';
 import Character from './components/Character';
+import axios from 'axios';
+
 
 function App() {
   const [characters, setCharacters] = useState([]);
 
-    useEffect(() => {
-        fetch(`https://swapi.dev/api/people/`)
-        .then(res => {
-            res.json();
-            console.log(res.data);
-        }).then(data => {
-            setCharacters(data.results)
-        }).catch(err => console.error(err));
-        
-    }, []);
-    return ( <div className="App"> 
-        {characters && characters.map((character) => {
-            return <h1 className="Header"><Character key={character.idx} name={character.name} /></h1>
-        })}
-    </div>
-    );
-   
+  useEffect(() => {
+    axios
+      .get('https://swapi.dev/api/people/')
+      .then(res => {
+        console.log('dataCheck', res.data);
+        const characterNames = res.data.map(character => character.name);
+        setCharacters(characterNames);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }, []);
 
+  console.log('characterCheck', characters);
+
+  return (
+    <div className="App">
+      {characters.map((name, idx) => (
+        <h1 className="Header" key={idx}>
+          <Character name={name} />
+        </h1>
+      ))}
+    </div>
+  );
 }
 
 export default App;
+
+
 
 
  // Try to think through what state you'll need for this app before starting. Then build out

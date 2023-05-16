@@ -1,7 +1,6 @@
 // Write your Character component here
 import React from "react";
 
-
 function Character({ name }) {
     return ( 
     <div className ="character">
